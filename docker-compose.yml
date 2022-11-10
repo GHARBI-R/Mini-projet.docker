@@ -10,6 +10,13 @@ services:
       - ./website:/var/www/html
     networks:
       - res-rima
+    deploy:
+      replicas: 1
+      update_config: 
+        parallelism: 2
+        delay: 10s
+      restart_policy: 
+        condition: on-failure
     environment:
       - USERNAME = rima
       - PASSWORD = gharbi
@@ -22,5 +29,13 @@ services:
       - ./simple_api/student_age.json:/data/student_age.json
     networks:
       - res-rima
+    deploy:
+      replicas: 1
+      update_config:
+        parallelism: 2
+        delay: 10s
+      restart_policy:
+        condition: on-failure   
+
 networks:
   res-rima:
