@@ -1,0 +1,26 @@
+version: '3'
+services:
+  web:
+    image: php:apache
+    depends_on:
+      - app-rima
+    ports:
+      - 8080:80
+    volumes:
+      - ./website:/var/www/html
+    networks:
+      - res-rima
+    environment:
+      - USERNAME = rima
+      - PASSWORD = gharbi
+
+  app-rima:
+    image: app-rima:v1
+    ports:
+      - 5001:5000
+    volumes:
+      - ./simple_api/student_age.json:/data/student_age.json
+    networks:
+      - res-rima
+networks:
+  res-rima:
